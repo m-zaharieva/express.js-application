@@ -9,7 +9,9 @@
 [ ] Create a congiguration file for the mongoose DB and set a constanta to the constants file for the DB connection string.
 [X] Set express.urlencoded to parse form data to js object from the request.
 [X] Set the static files via exporess.static;
-[ ] 
-[ ] 
+[ ] Create a global routes files to use the express-router modulation.
+[ ] Set a global middleware for user authentication in routes.js file.
+[X] Create Controller and Service folders
+[ ] Start with authController file and authService files to set the user auth functionality
 [ ] 
 [ ] Global error handler to catch all unhandled errors
