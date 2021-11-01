@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
-
-exports.database = (string) => {
-    return mongoose.connect(string, {
+exports.db = (connectionString) => {
+    return mongoose.connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    })
-}
+    });
+};

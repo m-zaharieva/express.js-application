@@ -1,32 +1,31 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const { PORT, DB_CONNECTION_STRING } = require('./config/constants.js');
 const { handlebars } = require('./config/handlebars.js');
-const { database } = require('./config/database.js');
-const authMiddleware = require('./middlewares/auth.js');
-const router = require('./routes.js');
-const { errorHandler } = require('./middlewares/errorHandler.js');
-
+const { db } = require('./config/database.js');
 
 const app = express();
-app.use('/static', express.static(path.resolve(__dirname, './static')));
 app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(authMiddleware.auth);
+app.use('/static', express.static(path.resolve(__dirname, './static')));
 handlebars(app);
-app.use(router);
-app.use(errorHandler);
 
 
 
-database(DB_CONNECTION_STRING)
+app.get('/', (req, res) => {
+    res.render('home');
+})
+
+
+
+
+db(DB_CONNECTION_STRING)
     .then(() => {
         app.listen(PORT, () => {
-            console.log('Application is running on http://localhost:3000 ...');
+            console.log(`Application is running on http://localhost:${PORT}...`);
         });
     })
     .catch(err => {
-        res.status(500).send('Server error:', err.message);
-    })
+        // TODO error handler
+        console.log('DB connection error', err.message);
+    });
