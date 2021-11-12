@@ -15,6 +15,7 @@ const register = (userInput) => {
             return bcrypt.hash(userInput.password, 10)
         })
         .then(hash => {
+            // TODO; change according to the requirements of the model
             return User.create({username: userInput.username, hashedPassword: hash});
         })
         .catch(err => {
